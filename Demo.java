@@ -1,5 +1,8 @@
+
 public class Demo {
     public static void main(String[] args) {
-        System.out.print("hellow java");
+        String name = "Rohit";
+        
+        System.out.println(name.substring(1));
     }
 }

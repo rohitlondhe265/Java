@@ -1,4 +1,5 @@
 package Hashing.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class CustomHashMap {
@@ -70,6 +71,55 @@ public class CustomHashMap {
             }
         }
 
+        public V get(K key){
+            int bucketIndex = hashFuction(key);
+            int dataIndex = searchInLinkedList(key, bucketIndex);
+            if(dataIndex == -1){
+                return null;
+            } else {
+                Node data = buckets[bucketIndex].get(dataIndex);
+                return data.value;
+            }
+        }
+
+        public boolean containsKey(K key){
+            int bucketIndex = hashFuction(key);
+            int dataIndex = searchInLinkedList(key, bucketIndex);
+            if(dataIndex == -1){
+                return false;
+            } else{
+                return true;
+            }
+        }
+
+        public V removeKey(K key){
+            int bucketIndex = hashFuction(key);
+            int dataIndex = searchInLinkedList(key, bucketIndex);
+            if(dataIndex == -1){
+                return null;
+            } else {
+                Node data = buckets[bucketIndex].remove(dataIndex);
+                n--;
+                return data.value;
+            }
+        }
+
+        public boolean isEmpty(){
+            return n == 0;
+        }
+
+        public ArrayList<K> keySet() {
+            ArrayList<K> keys = new ArrayList<>();
+            for(int i=0; i<buckets.length; i++){
+                LinkedList<Node> ll = buckets[i];
+                for(int j=0; j<ll.size(); j++){
+                    Node data = ll.get(j);
+                    keys.add(data.key);
+                }
+            }
+            return keys;
+        }
+
     }
 
     public static void main(String args[]) {
@@ -78,8 +128,11 @@ public class CustomHashMap {
         map.put("india", 1000);
         map.put("us", 2000);
         map.put("china", 5000);
-
-
+        map.removeKey("china");
+        ArrayList<String> keys = map.keySet();
+        for(int i=0; i<keys.size(); i++){
+            System.out.println("{ key: " + keys.get(i) + "  value: " + map.get(keys.get(i)) + " }");
+        }
 
     }
 }
