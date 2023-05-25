@@ -1,0 +1,43 @@
+Tree is a Hierarchial DS
+Root
+Branchs
+Nodes
+Leaf Nodes : nodes not having further child nodes
+Binary Tree : At max two child Nodes
+left child  - parent node -  right child
+Nodes having same parent Node are called Sibling Nodes
+Ancestors : all parent nodes till the root node
+Levels : 
+Depth : 
+Subtree : left Subtree & right Subtree
+
+DFS {Depth First Search} : DFS of tree are Preorder, Inorder & Postorder Traversal
+Preorder Traversal : root, left Subtree, right Subtree
+Inorder Traversal : left Subtree, root, right Subtree
+Postorder Traversal : left Subtree, right Subtree, root
+
+BFS {Breadth First Search} : BFS of tree is level Order Traversal
+Level Order Traversal : print data level wise
+
+Diameter of a Tree : Number of Nodes in the longest path between two Nodes
+
+BST { Binary Search Tree } : 
+            Search time complexity in normal Binary Tree is O(n) where 'n' is Number of nodes in tree.
+            In BST Search time complexity is O(h) where 'h' is height of the tree, in normal cases where h < n so our Search time complexity in normal cases is O(log(n)). hence it is used for fast lookup.
+        # It is Binary Tree with some additional properties such as : 
+            1). Left Subtree Nodes < Root
+            2). Right Subtree Nodes > Root
+            3). Left and Right Subtree are also BST with no duplicates
+        # Inorder Traversal of BST always gives a sorted sequence
+        # BST makes Search efficient :
+            let say 'target' is our value to Search in BST then
+            if(target < root) { Search in the Left Subtree }
+            if(target > root) { Search in the Right Subtree }
+            if(target == root) { return the answer }
+    # Skewed Tree : is a tree which is not balanced and follows a linear fashion
+        
+
+
+
+
+

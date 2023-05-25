@@ -1,0 +1,34 @@
+# Switch syntax
+DayOfWeek day = DayOfWeek.FRIDAY;
+int numOfLetters;
+switch (day)
+{
+  case MONDAY:
+  case FRIDAY:
+  case SUNDAY:
+    numOfLetters = 6;
+    break;
+  case TUESDAY:
+    numOfLetters = 7;
+    break;
+  case THURSDAY:
+  case SATURDAY:
+    numOfLetters = 8;
+    break;
+  case WEDNESDAY:
+    numOfLetters = 9;
+    break;
+  default:
+    numOfLetters = -1;
+}
+
+# Modern switch syntax
+DayOfWeek day = DayOfWeek.FRIDAY;
+int numOfLetters = switch (day)
+{
+  case MONDAY, FRIDAY, SUNDAY -> 6;
+  case TUESDAY                -> 7;
+  case THURSDAY, SATURDAY     -> 8;
+  case WEDNESDAY              -> 9;
+  default -> -1;
+};
