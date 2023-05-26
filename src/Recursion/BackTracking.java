@@ -127,20 +127,146 @@ public class BackTracking {
         path[r][c] = 0;
     }
 
+    // N-Queens
+    public static int nQueens(boolean[][] board, int row) {
+        if (row == board.length) {
+            display(board);
+            System.out.println();
+            return 1;
+        }
+        int count = 0;
+        for (int col = 0; col < board.length; col++) {
+            if (isSafe(board, row, col)) {
+                board[row][col] = true;
+                count += nQueens(board, row+1);
+                board[row][col] = false;
+            }
+        }
+        return count;
+    }
+    private static boolean isSafe(boolean[][] board, int row, int col) {
+        // Check for Horizontal direction
+        for (int i = 0; i < row; i++) {
+            if (board[i][col]) {
+                return false;
+            }
+        }
+        // for left Diagonal
+        int maxLeft = Math.min(row, col);
+        for (int i = 0; i <= maxLeft; i++) {
+            if (board[row-i][col-i]) {
+                return false;
+            }
+        }
+        // for right Diagonal
+        int maxRight = Math.min(row, board.length-1-col);
+        for (int i = 0; i <= maxRight; i++) {
+            if (board[row-i][col+i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    private static void display(boolean[][] board) {
+        for (boolean[] row : board) {
+            for (boolean col : row) {
+                if (col) {
+                    System.out.print("Q ");
+                } else {
+                    System.out.print("X ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    // N-Knights
+    public static void nKnights(boolean[][] board, int row, int col, int knights) {
+        if (knights == 0) {
+            displayKnight(board);
+            System.out.println();
+            return;
+        }
+        if (row == board.length-1 && col == board.length) {
+            return;
+        }
+        if (col == board.length) {
+            nKnights(board, row+1, 0, knights);
+            return;
+        }
+        if (isSafeKnight(board, row, col)) {
+            board[row][col] = true;
+            nKnights(board, row, col+1, knights-1);
+            board[row][col] = false;
+        }
+        // if it's not safe to put just move ahead
+        nKnights(board, row, col+1, knights);
+    }
+    private static boolean isSafeKnight(boolean[][] board, int row, int col) {
+        // top left
+        if (isValid(board, row-2, col-1)) {
+            if (board[row-2][col-1]) {
+                return false;
+            }
+        }
+        // top right
+        if (isValid(board, row-2, col+1)) {
+            if (board[row-2][col+1]) {
+                return false;
+            }
+        }
+        // top left
+        if (isValid(board, row-1, col+2)) {
+            if (board[row-1][col+2]) {
+                return false;
+            }
+        }
+        // top right
+        if (isValid(board, row-1, col-2)) {
+            if (board[row-1][col-2]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // to check whether the row and col provided are out of bound or not
+    private static boolean isValid(boolean[][] board, int row, int col) {
+        if (row >= 0 && row < board.length && col >= 0 && col < board.length) {
+            return true;
+        }
+        return false;
+    }
+    private static void displayKnight(boolean[][] board) {
+        for (boolean[] row : board) {
+            for (boolean col : row) {
+                if (col) {
+                    System.out.print("K ");
+                } else {
+                    System.out.print("X ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
         // System.out.println(paths(3, 3));
         // mazePaths(3, 3, "");
         // System.out.println(mazePathsAL(3, 3, ""));
 
-        boolean[][] maze = {
-            {true, true, true},
-            {true, true, true},
-            {true, true, true}
-        };
+        // boolean[][] maze = {
+        //     {true, true, true},
+        //     {true, true, true},
+        //     {true, true, true}
+        // };
         // mazeWithObstacle(maze, 0, 0, "");
-        int[][] path = new int[maze.length][maze[0].length];
+        // int[][] path = new int[maze.length][maze[0].length];
 
-        // allPaths(maze, 0, 0, "");
-        allPathsPrint(maze, 0, 0, "", path, 1);
+        // // allPaths(maze, 0, 0, "");
+        // allPathsPrint(maze, 0, 0, "", path, 1);
+        boolean[][] board = new boolean[4][4];
+        // System.out.println(nQueens(board, 0));
+        nKnights(board, 0, 0, 8);
     }
 }
